@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="The Mental Math Game"
+      description="Test your math skill with a several mental math questions."
+    />
+    <title>Mental Math Game</title>
+    <link rel="stylesheet" href="style.css" />
+    <script defer src="script.js"></script>
+  </head>
+  <body class="neutral-color">
+    <div class="game-container">
+      <div class="start-text-container" id="start-text-container">
+        <h1 class="header">The Mental Math Game</h1>
+        <p>
+          This is a small website I made to test your math skill, especially
+          mental ones!
+        </p>
+      </div>
+      <div class="question-container hide" id="question-container">
+        <h2 class="header" id="question">Question goes here...</h2>
+      </div>
+      <div class="end-text-container hide" id="end-text-container">
+        <p id="end-text">Ending text goes here...</p>
+        <ol id="game-history"></ol>
+      </div>
+      <div class="form-container hide" id="form-container">
+        <input
+          type="number"
+          id="answer-input"
+          name="answer"
+          inputmode="numeric"
+          required
+        />
+      </div>
+      <div class="submit-container">
+        <input type="button" value="Start" id="start" />
+        <input type="button" value="Next" class="hide" id="next" />
+        <input type="button" value="Restart" class="hide" id="restart" />
+        <input type="button" value="Answer" class="hide" id="submit-button" />
+      </div>
+      <div class="footer-container">
+        <div class="footer">
+          <p>
+            There's only addition, subtraction, and multiplication for the time
+            being.
+          </p>
+          <h2 class="header">&copy; 2023 XnonXte</h2>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

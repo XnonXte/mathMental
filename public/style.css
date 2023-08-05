@@ -1,0 +1,112 @@
+@import url("https://fonts.googleapis.com/css2?family=Mulish:wght@200&family=Space+Mono&display=swap");
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  font-family: Mulish, sans-serif;
+  font-size: 100%;
+}
+
+.header {
+  font-family: "Space Mono", monospace;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+}
+
+.game-container {
+  width: 37.5em;
+  max-width: 80%;
+  background-color: white;
+  border: 2px solid black;
+  border-radius: 12px;
+  box-shadow: 2px 5px;
+  padding: 0.625em;
+}
+
+.question-container {
+  color: white;
+  background-color: black;
+  border: 1px solid black;
+  border-radius: 6px;
+  font-size: 1.25em;
+}
+
+.form-container input[type="number"] {
+  border: 1px solid black;
+  border-radius: 4px;
+  font-size: 1.125em;
+}
+
+/* Chromium and Safari. */
+.form-container input[type="number"]::-webkit-inner-spin-button {
+  display: none;
+}
+
+/* Firefox. */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.submit-container input[type="button"] {
+  border: 1px solid black;
+  border-radius: 4px;
+  color: white;
+  background-color: black;
+  padding: 0.313em 1.563em;
+}
+
+.submit-container input[type="button"]:hover {
+  background-color: #333;
+}
+
+.question-container {
+  margin: 1.25em 0;
+}
+
+.submit-container {
+  margin: 0.625em 0;
+}
+
+.footer-container {
+  margin-top: 1.563em;
+  font-size: 0.875em;
+}
+
+.hide {
+  display: none;
+}
+
+.neutral-color {
+  background-color: hsl(0, 0%, 50%);
+}
+
+.wrong-color {
+  background-color: hsl(0, 100%, 20%);
+}
+
+.correct-color {
+  background-color: hsl(140, 100%, 20%);
+}
+
+.end-text-container ol {
+  text-align: start;
+  text-align-last: start;
+}
+
+.end-text-container li {
+  background-color: lightblue;
+  border-radius: 4px;
+  border: 1px solid black;
+  margin: 12px;
+  padding: 6px;
+}
