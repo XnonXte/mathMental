@@ -24,14 +24,13 @@ function getQuestions(callback) {
 
   for (let i = 0; i < 10; i++) {
     const operation = ["+", "-", "*", "/"][Math.floor(Math.random() * 4)];
-    let num1 = getRandomInt(1, 100);
-    let num2 = getRandomInt(1, 100);
+    let num1 = getRandomInt(1, 50);
+    let num2 = getRandomInt(1, 50);
 
     if (operation === "/") {
       // Ensure division has an integer result and avoid division by zero.
-      // We use 1 to 20 because that's seemingly the sweet spot for this operation.
       num2 = getRandomInt(1, 20);
-      num1 = num2 * getRandomInt(1, 20);
+      num1 = num2 * getRandomInt(1, 10);
     }
 
     let answer;
@@ -57,7 +56,6 @@ function getQuestions(callback) {
     });
   }
 
-  console.log(questions);
   callback();
 }
 
@@ -68,6 +66,7 @@ nextInputButton.addEventListener("click", setNextQuestion);
 function startGame() {
   answersLogArray = [];
   questions = []; // Clear old questions.
+
   getQuestions(() => {
     // We put this inside a callback function so it will run after the initial function.
     startInputButton.classList.add("hide");
@@ -98,6 +97,7 @@ function setNextQuestion() {
     gameHistoryList.innerHTML = ""; // Clearing the innerHTML after each game.
     answersLogArray.forEach((item) => {
       let node;
+
       if (item.answer === item.userAnswer) {
         list = document.createElement("li");
         list.classList.add("correct-color-history");
@@ -117,11 +117,6 @@ function setNextQuestion() {
     });
   } else {
     currentQuestionIndex++;
-    submitInputButton.classList.remove("hide");
-    nextInputButton.classList.add("hide");
-    restartInputButton.classList.add("hide");
-    endingTextDivContainer.classList.add("hide");
-    userInput.value = "";
     resetQuestionState();
     showQuestion(questions[currentQuestionIndex]);
   }
@@ -157,7 +152,11 @@ function processAnswer() {
 }
 
 function resetQuestionState() {
-  // Resetting the background color to neutral for every new question.
+  submitInputButton.classList.remove("hide");
+  nextInputButton.classList.add("hide");
+  restartInputButton.classList.add("hide");
+  endingTextDivContainer.classList.add("hide");
+  userInput.value = "";
   htmlBodyElement.className = "";
   htmlBodyElement.classList.add("neutral-color");
 }
