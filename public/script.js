@@ -1,3 +1,7 @@
+/*
+Copyright (C) 2023 XnonXte - This application is released under MIT License.
+*/
+
 const userInput = document.getElementById("answer-input");
 const submitInputButton = document.getElementById("submit-button");
 const startInputButton = document.getElementById("start");
@@ -15,10 +19,20 @@ const gameHistoryList = document.getElementById("game-history");
 let currentQuestionIndex, correctAnswerCount, answersLogArray, questions;
 
 function getQuestions(callback) {
+  const getRandomInt = (min, max) =>
+    Math.floor(Math.random() * (max - min + 1)) + min;
+
   for (let i = 0; i < 10; i++) {
-    const operation = ["+", "-", "*"][Math.floor(Math.random() * 3)];
-    const num1 = Math.floor(Math.random() * 50) + 1;
-    const num2 = Math.floor(Math.random() * 50) + 1;
+    const operation = ["+", "-", "*", "/"][Math.floor(Math.random() * 4)];
+    let num1 = getRandomInt(1, 100);
+    let num2 = getRandomInt(1, 100);
+
+    if (operation === "/") {
+      // Ensure division has an integer result and avoid division by zero.
+      // We use 1 to 20 because that's seemingly the sweet spot for this operation.
+      num2 = getRandomInt(1, 20);
+      num1 = num2 * getRandomInt(1, 20);
+    }
 
     let answer;
     switch (operation) {
@@ -31,14 +45,18 @@ function getQuestions(callback) {
       case "*":
         answer = num1 * num2;
         break;
+      case "/":
+        answer = num1 / num2;
+        break;
     }
-    const question = `${num1} ${operation} ${num2}`;
 
+    const question = `${num1} ${operation} ${num2}`;
     questions.push({
       question,
       answer,
     });
   }
+
   console.log(questions);
   callback();
 }
@@ -68,7 +86,7 @@ function setNextQuestion() {
     // Preparing the ending text when the game is finished.
     endingTextDivContainer.classList.remove("hide");
     questionHeading.innerHTML = "Game finished!";
-    endingText.innerHTML = `You have solved ${correctAnswerCount} out of ${questions.length}!`;
+    endingText.innerHTML = `You have solved ${correctAnswerCount} out of ${questions.length} questions.`;
     nextInputButton.classList.add("hide");
     formDivContainer.classList.add("hide");
     restartInputButton.classList.remove("hide");
@@ -77,15 +95,20 @@ function setNextQuestion() {
     htmlBodyElement.classList.add("neutral-color");
 
     // Preparing the history list.
+    gameHistoryList.innerHTML = ""; // Clearing the innerHTML after each game.
     answersLogArray.forEach((item) => {
-      let node,
-        list = document.createElement("li");
-
+      let node;
       if (item.answer === item.userAnswer) {
-        node = document.createTextNode(`${item.question} = ${item.userAnswer}`);
-      } else {
+        list = document.createElement("li");
+        list.classList.add("correct-color-history");
         node = document.createTextNode(
-          `${item.question} != ${item.userAnswer} (correct answer: ${item.answer})`
+          `${item.question} equal to ${item.userAnswer}`
+        );
+      } else {
+        list = document.createElement("li");
+        list.classList.add("wrong-color-history");
+        node = document.createTextNode(
+          `${item.question} does not equal to ${item.userAnswer} (correct answer: ${item.answer})`
         );
       }
 
